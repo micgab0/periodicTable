@@ -62,7 +62,7 @@ ALTER TABLE public.elements OWNER TO freecodecamp;
 
 CREATE TABLE public.properties (
     atomic_number integer NOT NULL,
-    atomic_mass real NOT NULL,
+    atomic_mass numeric NOT NULL,
     melting_point_celsius numeric NOT NULL,
     boiling_point_celsius numeric NOT NULL,
     type_id integer NOT NULL
@@ -103,16 +103,16 @@ INSERT INTO public.elements VALUES (10, 'Ne', 'Neon');
 -- Data for Name: properties; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.properties VALUES (10, 20.18, -248.6, -246.1, 2);
+INSERT INTO public.properties VALUES (1, 1.008, -259.1, -252.9, 2);
+INSERT INTO public.properties VALUES (2, 4.0026, -272.2, -269, 1);
 INSERT INTO public.properties VALUES (3, 6.94, 180.54, 1342, 1);
 INSERT INTO public.properties VALUES (4, 9.0122, 1287, 2470, 1);
-INSERT INTO public.properties VALUES (1, 1.008, -259.1, -252.9, 2);
-INSERT INTO public.properties VALUES (2, 4.0026, -272.2, -269, 2);
-INSERT INTO public.properties VALUES (6, 12.011, 3550, 4027, 2);
-INSERT INTO public.properties VALUES (7, 14.007, -210.1, -195.8, 2);
-INSERT INTO public.properties VALUES (8, 15.999, -218, -183, 2);
-INSERT INTO public.properties VALUES (5, 10.81, 2075, 4000, 3);
+INSERT INTO public.properties VALUES (5, 10.81, 2075, 4000, 1);
+INSERT INTO public.properties VALUES (6, 12.011, 3550, 4027, 1);
+INSERT INTO public.properties VALUES (7, 14.007, -210.1, -195.8, 1);
+INSERT INTO public.properties VALUES (8, 15.999, -218, -183, 1);
 INSERT INTO public.properties VALUES (9, 18.998, -220, -188.1, 2);
-INSERT INTO public.properties VALUES (10, 20.18, -248.6, -246.1, 2);
 
 
 --
@@ -181,6 +181,14 @@ ALTER TABLE ONLY public.elements
 
 
 --
+-- Name: properties fk_properties_type; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.properties
+    ADD CONSTRAINT fk_properties_type FOREIGN KEY (type_id) REFERENCES public.types(type_id);
+
+
+--
 -- Name: properties properties_elements_fk; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
@@ -189,13 +197,6 @@ ALTER TABLE ONLY public.properties
 
 
 --
--- Name: properties properties_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
---
-
-ALTER TABLE ONLY public.properties
-    ADD CONSTRAINT properties_type_id_fkey FOREIGN KEY (type_id) REFERENCES public.types(type_id);
-
-
---
 -- PostgreSQL database dump complete
 --
+
